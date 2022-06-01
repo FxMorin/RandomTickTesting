@@ -29,9 +29,9 @@ public class TotallySugarCaneBlock implements TotallyBlock {
     }
 
     public int harvest() {
-        if (height > 1) {
-            age = 0;
-            int h = height-1;
+        if (this.height > 1) {
+            this.age = 0;
+            int h = this.height-1;
             this.height = 1;
             return h;
         }
