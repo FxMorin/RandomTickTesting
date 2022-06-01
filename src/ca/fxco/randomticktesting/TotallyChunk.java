@@ -18,6 +18,9 @@ public class TotallyChunk {
 
     public void randomTickChunk(TotallyBlockPos pos) {
         blocks[pos.getLinearPos()].randomTick(pos.getY());
+    }
+
+    public void increaseDelay() {
         currentDelay++;
         if (currentDelay >= delayLength) {
             for (TotallyBlock block : blocks)

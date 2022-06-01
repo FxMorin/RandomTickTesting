@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 
 public class Main {
 
-    public static final int TOTAL_TICKS = ((60 * 20) * 60) * 80; // 32 hours in ticks
+    public static final int TOTAL_TICKS = ((60 * 20) * 60) * 80; // 80 hours in ticks
     public static final int TOTAL_SIMULATIONS = 12500; // Basically how many ticks
     public static final int CHUNKS_PER_TICK = 1; // How many chunks to include per simulation. Usually 1
     public static final int DELAY_PER_CHUNKS = 5; // How many delay is there between chunks. Should be >= 1
@@ -53,10 +53,12 @@ public class Main {
         return () -> {
             int finish = Math.min(start + amount, TOTAL_CHUNKS);
             for (int tick = 0; tick < TOTAL_TICKS; tick++) {
-                for (int randTickSpeed = 0; randTickSpeed < RAND_TICK_SPEED; randTickSpeed++)
-                    for (int i = start; i < finish; i += CHUNKS_PER_TICK)
-                        for (int c = 0; c < CHUNKS_PER_TICK; c++)
-                            testingChunks[i+c].randomTickChunk(preComputerRandoms[tick][randTickSpeed][c]);
+                for (int i = start; i < finish; i += CHUNKS_PER_TICK)
+                    for (int c = 0; c < CHUNKS_PER_TICK; c++) {
+                        for (int randTickSpeed = 0; randTickSpeed < RAND_TICK_SPEED; randTickSpeed++)
+                            testingChunks[i + c].randomTickChunk(preComputerRandoms[tick][randTickSpeed][c]);
+                        testingChunks[i + c].increaseDelay();
+                    }
                 if (tick % TICKS_PER_FEEDBACK_STEP == 0 && tick != 0) {
                     int step = (int) ((float) tick / (float) TICKS_PER_FEEDBACK_STEP)-1;
                     if (++reachedTarget[step] == TOTAL_THREADS) {
