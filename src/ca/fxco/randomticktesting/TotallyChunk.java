@@ -16,8 +16,8 @@ public class TotallyChunk {
             blocks[i] = block.copy();
     }
 
-    public void randomTickChunk(int linearPos) {
-        blocks[linearPos].randomTick();
+    public void randomTickChunk(TotallyBlockPos pos) {
+        blocks[pos.getLinearPos()].randomTick(pos.getY());
         currentDelay++;
         if (currentDelay >= delayLength) {
             for (TotallyBlock block : blocks)
@@ -26,7 +26,7 @@ public class TotallyChunk {
         }
     }
 
-    public int getCount() {
+    public int getHarvests() {
         return this.harvests;
     }
 }

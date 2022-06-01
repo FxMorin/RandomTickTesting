@@ -2,7 +2,7 @@ package ca.fxco.randomticktesting;
 
 public interface TotallyBlock {
 
-    void randomTick();
+    void randomTick(short height);
     int harvest();
 
     TotallyBlock copy();
